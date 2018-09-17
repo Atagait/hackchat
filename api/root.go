@@ -97,6 +97,10 @@ func Login(password string) {
 	// TODO: We should figure out a way to safely store the token instead,
 	//       then simply refresh/reload the token when we start again,
 	//       so we don't need to (re)login every time..
+	//
+	//       Just in case, here's an interesting key/value database solution:
+	//       https://github.com/etcd-io/bbolt
+	//
 
 	// Store the "chat_token"
 	ChatToken = result.ChatToken
@@ -135,7 +139,7 @@ func LoadAccountData(token string) {
 }
 
 // FIXME: We need some sample chat data, because there's nothing there at the moment
-//        Sample response: {"ok":true,"chats":{"dids":[]}}
+//        Sample response: {"ok":true,"chats":{"username":[]}}
 
 // LoadChats loads the chat data associated with the token
 func LoadChats(token string) {
