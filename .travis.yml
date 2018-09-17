@@ -1,0 +1,41 @@
+# Disable sudo to enable containerization
+sudo: false
+
+# Setup Go language support
+language: go
+
+# Setup global environment variables
+env:
+  - TEST_COMMAND="go test -race -coverprofile=coverage.txt -covermode=atomic ./..."
+
+# Setup Go version specific configurations
+matrix:
+  include:
+  - go: master
+  - go: 1.10.x
+  - go: 1.9.x
+    env:
+      - TEST_COMMAND="echo \"Tests disabled for this version of Go\""
+  - go: 1.8.x
+    env:
+      - TEST_COMMAND="echo \"Tests disabled for this version of Go\""
+
+# Setup caching
+#cache:
+#  directories:
+#    - $HOME/.clobber/opt
+
+# Install dependencies
+install:
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  - dep ensure
+
+# Run tests and generate code coverage
+script:
+  - eval $TEST_COMMAND
+  - go build -o hackchat
+  - ./hackchat --version
+
+# Upload code coverage
+after_success:
+- bash <(curl -s https://codecov.io/bash)
