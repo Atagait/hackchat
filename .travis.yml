@@ -34,7 +34,7 @@ install:
 script:
   - eval $TEST_COMMAND
   - go build -o hackchat
-  - ./hackchat --version
+  #- ./hackchat --version
 
 # Upload code coverage
 after_success:

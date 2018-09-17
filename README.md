@@ -2,7 +2,7 @@
 
 # Hackchat
 
-A Hackmud Chat API wrapper, written in Go.
+A command-line interface and library for the Hackmud Chat API, written in Go.
 
 **NOTICE:** _Work in progress._
 
